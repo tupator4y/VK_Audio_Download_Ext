@@ -46,13 +46,18 @@ function download_file(url, name, type) {
 	fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
 	.then(response => response.json().then(function(result){
 		url = decode_url(result['status']['url']).replace("/index.m3u8",".mp3").replace(/\/\w{11}\//,'/')
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.responseType = "blob";
-        xhr.onload = function () {
-            download(xhr.response, name + ".mp3", type);
-        };
-        xhr.send();
+		if(String(url).indexOf("psv4") != -1) {
+			console.log("No files for this track are present.")
+		}
+		else {
+	        var xhr = new XMLHttpRequest();
+	        xhr.open("GET", url, true);
+	        xhr.responseType = "blob";
+	        xhr.onload = function () {
+	            download(xhr.response, name + ".mp3", type);
+	        };
+	        xhr.send();
+    	}
 	}))
 }
 
