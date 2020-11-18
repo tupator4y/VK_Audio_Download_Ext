@@ -32,7 +32,7 @@ function renderDownloadButton(audioData) {
     if (!el.classList.contains('dowloaded')) {
         el.className += ' dowloaded';
         var element = el.getElementsByClassName('audio_row_content');
-	element[0].length += 32;
+        element[0].length += 32;
         var a = document.createElement('a');
         a.setAttribute('onclick', 'getAudioFile("' + audioFullId + "_" + secretArr[2] + "_" + secretArr[5] + '", "' + audioData + '")');
         a.title = 'Download';
