@@ -1,6 +1,6 @@
 function getVkId() {
 	var url = window.location.href;
-	var reg = /[0-9]+/;
+	var reg = /[0-9]{9}/;
 	return reg.exec(url)[0];
 }
 
