@@ -1,10 +1,13 @@
 function getVkId() {
 	var url = window.location.href;
 	var reg = /([0-9]){9}/;
+	if(reg.exec(url) == null) {
+		return null;
+	}
 	return reg.exec(url)[0];
 }
 
-const decoder = {
+let decoder = {
     r: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMN0PQRSTUVWXYZO123456789+/=",
     vkId: getVkId(),
     getRealLink: function(a) {
@@ -109,6 +112,9 @@ function renderDownloadButton(audioData) {
 }
 
 function download_file(url, name, type) {
+	if(decoder.vkId == null) {
+		decoder.vkId = getVkId();
+	}
 	url = decoder.getRealLink(url);   
 
 	fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
